@@ -1288,6 +1288,7 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 }
 
 
+
 contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         string[] private items = [
@@ -1322,14 +1323,14 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Chalk & Chalkboard",
         "Scapel",
         "Rapier",
-        "Airpods",
-        "Whoop",
-        "Apple Watch",
-        "Tesla Model S",
-        
-        
+        "Pineapple",
+        "Tamagotchi",
+        "Yo-Yo",
+        "Super Soaker CPS 2000",
+
+
     ];
-    
+
     string[] private tops = [
 
         "Blouse",
@@ -1373,13 +1374,11 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Denim Shirt",
         "Linen Shirt",
         "Polo Shirt",
-        "Startup Hoodie",
-        "Patagonia Vest",
-        "Stanford Hoodie"
-        
+        "Black Hoodie",
+        "White Tall Tee",
 
     ];
-    
+
     string[] private hats = [
 
 
@@ -1421,9 +1420,10 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Surgeons Mask",
         "Silk Hood",
         "Linen Hood",
-        "Hood"
+        "Hood",
+        "Alien Facehugger",
     ];
-    
+
     string[] private waist = [
         "Buckle",
         "Strap",
@@ -1437,10 +1437,12 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Skinny",
         "Canvas",
         "Studded",
-        "Western"
+        "Western",
+        "Fanny Pack",
+        "Utility Belt",
 
     ];
-    
+
     string[] private shoes = [
       "Pumps",
       "Stilettos",
@@ -1479,13 +1481,10 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       "Slides",
       "Toe-Post Sandal",
       "Active Sandals",
-      "Allbirds",
-      "Birkenstocks",
-      "Yeezys",
-      "Rainbows"
+      "Roller Skates",
 
     ];
-    
+
     string[] private gloves = [
         "Touch Screen Gloves",
         "Silk Glove Liners",
@@ -1516,25 +1515,34 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Convertible Gloves",
         "Food Servicing Gloves",
         "Weightlifting Gloves",
-        "Rubber Gloves"
+        "Rubber Gloves",
+        "Boxing Gloves",
+
 
     ];
-    
+
     string[] private necklaces = [
         "Necklace",
         "Amulet",
-        "Pendant"
+        "Pendant",
+        "Gold Chain",
+        "Shark Tooth Necklace",
+        "Gold Chain with Humongous Clock",
+        "Locket with Picture",
+
     ];
-    
+
     string[] private rings = [
         "Gold Ring",
         "Silver Ring",
         "Bronze Ring",
         "Platinum Ring",
         "Titanium Ring",
-        "Oura Ring"
+        "Stone of Jordan",
+        "Ring Pop",
+
     ];
-    
+
     string[] private suffixes = [
         "of Normalcy",
         "of Boredum",
@@ -1551,11 +1559,10 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of the NPC",
         "of Failure",
         "of Absorbtion",
-        "of the AI",
-        "Of Silicon Valley"
-        
+        "of the AI"
+
     ];
-    
+
     string[] private namePrefixes = [
 
         "Apathy", "Admiration", "Acclimation", "Better", "Best", "Bogus", "Burden", "Boring", 
@@ -1588,6 +1595,11 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     "Grasp",
     "Roar"
     ];
+    
+    string[] private disposition = [ ];
+    string[] private occupation = [ ];
+    string private name = [ ];
+
     
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
@@ -1624,6 +1636,17 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     function getRing(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "RING", rings);
     }
+    
+    function getDispotion(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "DISPOSITION", dispositions);
+    }
+    
+    function getOccupation(uin256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "OCCUPATION", occupations);
+    }
+    
+    function getName(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "NAME", names);
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
@@ -1679,7 +1702,19 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[15] = getRing(tokenId);
 
-        parts[16] = '</text></svg>';
+        parts[16] = '</text><text x="10" y="180" class="base">';
+        
+        parts[17] = getDisposition(tokenId);
+        
+        parts[18] = '</text><text x="10" y="200" class="base";
+      
+        parts[19] = getOccupation(tokenId);
+        
+        parts[20] = '</text><text x="10" y="220" class="base";
+        
+        parts[21] = getName(tokenId);
+        
+        parts[22] = '</text><text x="10" y="240" class="base";
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
         output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));

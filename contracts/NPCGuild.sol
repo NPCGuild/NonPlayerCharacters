@@ -1321,7 +1321,13 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Ruler",
         "Chalk & Chalkboard",
         "Scapel",
-        "Rapier"
+        "Rapier",
+        "Airpods",
+        "Whoop",
+        "Apple Watch",
+        "Tesla Model S",
+        
+        
     ];
     
     string[] private tops = [
@@ -1366,7 +1372,11 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Classic Short Sleeve Shirt",
         "Denim Shirt",
         "Linen Shirt",
-        "Polo Shirt"
+        "Polo Shirt",
+        "Startup Hoodie",
+        "Patagonia Vest",
+        "Stanford Hoodie"
+        
 
     ];
     
@@ -1468,7 +1478,11 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       "Slippers",
       "Slides",
       "Toe-Post Sandal",
-      "Active Sandals"
+      "Active Sandals",
+      "Allbirds",
+      "Birkenstocks",
+      "Yeezys",
+      "Rainbows"
 
     ];
     
@@ -1517,7 +1531,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Silver Ring",
         "Bronze Ring",
         "Platinum Ring",
-        "Titanium Ring"
+        "Titanium Ring",
+        "Oura Ring"
     ];
     
     string[] private suffixes = [
@@ -1536,7 +1551,9 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of the NPC",
         "of Failure",
         "of Absorbtion",
-        "of the AI"
+        "of the AI",
+        "Of Silicon Valley"
+        
     ];
     
     string[] private namePrefixes = [

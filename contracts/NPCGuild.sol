@@ -1327,6 +1327,9 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Tamagotchi",
         "Yo-Yo",
         "Super Soaker CPS 2000",
+         "Startup Hoodie",
+        "Patagonia Vest",
+        "Stanford Hoodie"
 
 
     ];
@@ -1481,7 +1484,11 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       "Slides",
       "Toe-Post Sandal",
       "Active Sandals",
-      "Roller Skates",
+      "Allbirds",
+      "Birkenstocks",
+      "Yeezys",
+      "Rainbows",
+      "Roller Skates"
 
     ];
 
@@ -1516,7 +1523,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Food Servicing Gloves",
         "Weightlifting Gloves",
         "Rubber Gloves",
-        "Boxing Gloves",
+        "Boxing Gloves"
 
 
     ];
@@ -1528,7 +1535,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Gold Chain",
         "Shark Tooth Necklace",
         "Gold Chain with Humongous Clock",
-        "Locket with Picture",
+        "Locket with Picture"
 
     ];
 
@@ -1539,7 +1546,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Platinum Ring",
         "Titanium Ring",
         "Stone of Jordan",
-        "Ring Pop",
+        "Oura Ring",
+        "Ring Pop"
 
     ];
 
@@ -1559,6 +1567,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of the NPC",
         "of Failure",
         "of Absorbtion",
+        "of Silicon Valley",
+        "of Boulder",
         "of the AI"
 
     ];

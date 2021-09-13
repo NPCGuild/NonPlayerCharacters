@@ -1329,7 +1329,10 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Super Soaker CPS 2000",
          "Startup Hoodie",
         "Patagonia Vest",
-        "Stanford Hoodie"
+        "Stanford Hoodie",
+        "Swiss Army Knife",
+        "Smartphone",
+        
 
 
     ];
@@ -1569,7 +1572,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of Absorbtion",
         "of Silicon Valley",
         "of Boulder",
-        "of the AI"
+        "of the AI",
+        "of Zoom",
 
     ];
 

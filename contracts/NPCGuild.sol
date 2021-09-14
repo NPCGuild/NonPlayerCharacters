@@ -1329,16 +1329,21 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Super Soaker CPS 2000",
          "Startup Hoodie",
         "Patagonia Vest",
-        "Stanford Hoodie",
+        
         "Swiss Army Knife",
         "Smartphone",
+        "Vaporizer Pen",
+        "Neurolink",
+        "Portal Gun"
         
 
 
     ];
 
     string[] private tops = [
-
+    
+        "Stanford Hoodie",
+        "Shamanic Robe",
         "Blouse",
         "Crop Top",
         "Tube Top",
@@ -1550,6 +1555,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Titanium Ring",
         "Stone of Jordan",
         "Oura Ring",
+        "Ring of Goodvibes",
         "Ring Pop"
 
     ];

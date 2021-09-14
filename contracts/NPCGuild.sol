@@ -1327,9 +1327,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Tamagotchi",
         "Yo-Yo",
         "Super Soaker CPS 2000",
-         "Startup Hoodie",
-        "Patagonia Vest",
-        
+        "DMT crystals",
         "Swiss Army Knife",
         "Smartphone",
         "Vaporizer Pen",
@@ -1341,7 +1339,9 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     ];
 
     string[] private tops = [
-    
+        
+        "Startup Hoodie",
+        "Patagonia Vest",
         "Stanford Hoodie",
         "Shamanic Robe",
         "Blouse",

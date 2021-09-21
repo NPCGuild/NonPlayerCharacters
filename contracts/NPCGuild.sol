@@ -1332,7 +1332,9 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Smartphone",
         "Vaporizer Pen",
         "Neurolink",
-        "Portal Gun"
+        "Portal Gun",
+        "Disposable Phone",
+        "Yu-Gi-Oh! Duel Disk",
         
 
 
@@ -1433,6 +1435,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Linen Hood",
         "Hood",
         "Alien Facehugger",
+        "Anonymous Mask",
+        "Mining Hat",
     ];
 
     string[] private waist = [
@@ -1451,6 +1455,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Western",
         "Fanny Pack",
         "Utility Belt",
+        
 
     ];
 
@@ -1497,6 +1502,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       "Yeezys",
       "Rainbows",
       "Roller Skates"
+      "Tesla Trucks Shoes",
 
     ];
 
@@ -1543,7 +1549,8 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Gold Chain",
         "Shark Tooth Necklace",
         "Gold Chain with Humongous Clock",
-        "Locket with Picture"
+        "Locket with Picture",
+        "Ethereum Amulet"
 
     ];
 
@@ -1580,6 +1587,10 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of Boulder",
         "of the AI",
         "of Zoom",
+        "of Apes",
+        "of Normies",
+        "of Buidlers",
+        "of Hodlers",
 
     ];
 

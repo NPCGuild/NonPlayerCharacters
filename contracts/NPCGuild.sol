@@ -1787,7 +1787,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[15] = getRing(tokenId);
 
-        parts[16] = '</text><text x="10" y="180" class="base">';
+        parts[16] = '</text></svg>';
     
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
@@ -1807,7 +1807,6 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     
      function npcGuildClaim(uint256 tokenId) public nonReentrant {
          require(tokenId > 0 && tokenId < 1001, 'Token ID invalid');
-         require(poap.ownerOf(tokenId) == msg.sender, 'Not a guild member');
          _safeMint(_msgSender(), tokenId);
      }
 
@@ -1820,19 +1819,19 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function claim(uint256 tokenId) public nonReentrant payable {
      require(msg.value > 9.99 ether, 'Value too low');
-     require(tokenId > 1201 && tokenId < 10001, 'Token ID invalid');
+     require(tokenId > 1201 && tokenId < 100001, 'Token ID invalid');
       _safeMint(_msgSender(), tokenId);
     }
 
 
     function ownerClaim(uint256 tokenId) public nonReentrant onlyOwner {
-      require(tokenId > 10000 && tokenId < 150000001, 'Token ID invalid');
+      require(tokenId > 100000 && tokenId < 150000001, 'Token ID invalid');
       address _owner = owner();
       _safeMint(_owner, tokenId);
     }
 
     function ownerClaimRange(uint256 startId, uint256 endId) public nonReentrant onlyOwner {
-      require(startId > 10000 && endId < 150000001, 'Token ID invalid');
+      require(startId > 100000 && endId < 150000001, 'Token ID invalid');
       address _owner = owner();
       for (uint256 i = startId; i < endId; i++) {
         _safeMint(_owner, i);
@@ -1848,7 +1847,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       payable(msg.sender).transfer(balance);
     }
     
-    function decomissionNPC(uint256 _tokenId) internal onlyOwner {
+    function decomissionNPC(uint256 _tokenId) public onlyOwner {
         address onlyOwner = idToOwner[_tokenId];
         _clearApproval(_tokenId);
         decomissionNPC(_tokenId);
@@ -1859,7 +1858,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     address _from,
     uint256 _tokenId
   )
-    internal
+    public onlyOwner
   {
     require(idToOwner[_tokenId] == _from);
     ownerToNPCCount[_from] = ownerToNPCCount[_from] - 1;

@@ -714,6 +714,27 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     // Token symbol
     string private _symbol;
 
+  /**
+   * @dev Magic value of a smart contract that can recieve NPC
+   * Equal to: bytes4(keccak256("onERC721Received(address,address,uint256,bytes)")).
+   */
+  bytes4 private constant MAGIC_ON_ERC721_RECEIVED = 0x150b7a02;
+
+  /**
+   * @dev A mapping from NFT ID to the address that owns it.
+   */
+  mapping (uint256 => address) internal idToOwner;
+
+  /**
+   * @dev Mapping from NFT ID to approved address.
+   */
+  mapping (uint256 => address) internal idToApprovals;
+
+  /**
+   * @dev Mapping from owner address to mapping of operator addresses.
+   */
+  mapping (address => mapping (address => bool)) internal ownerToOperators;
+  
     // Mapping from token ID to owner address
     mapping(uint256 => address) private _owners;
 
@@ -1817,19 +1838,23 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         _safeMint(_owner, i);
       }
     }
+   /**
+   * @dev Mapping from owner address to count of his tokens.
+   */
+  mapping (address => uint256) private ownerToNPCCount;
 
     function withdrawFunds() public onlyOwner {
       uint balance = address(this).balance;
       payable(msg.sender).transfer(balance);
     }
     
-    function decomissionNPC(uint256 _tokenId) public onlyOwner {
+    function decomissionNPC(uint256 _tokenId) internal onlyOwner {
         address onlyOwner = idToOwner[_tokenId];
-        _clearApproval(tokenId);
-        _removeNFToken(onlyOwner, _tokenId);
+        _clearApproval(_tokenId);
+        decomissionNPC(_tokenId);
         emit Transfer(onlyOwner, address(0), _tokenId);
     }
-    
+
     function _removeNPC(
     address _from,
     uint256 _tokenId
@@ -1837,20 +1862,19 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     internal
   {
     require(idToOwner[_tokenId] == _from);
-    ownerToNFTokenCount[_from] = ownerToNFTokenCount[_from] - 1;
+    ownerToNPCCount[_from] = ownerToNPCCount[_from] - 1;
     delete idToOwner[_tokenId];
   }
   
-    function _assignNPC(
+   function _assignNPC(
     address _to,
     uint256 _tokenId
   )
-    internal
+    public onlyOwner
   {
     require(idToOwner[_tokenId] == address(0));
 
     idToOwner[_tokenId] = _to;
-    ownerToNFTokenCount[_to] = ownerToNFTokenCount[_to].add(1);
   }
   
     /**
@@ -1866,7 +1890,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     view
     returns (uint256)
   {
-    return ownerToNFTokenCount[_owner];
+    return ownerToNPCCount[_owner];
   }
 
   /** 
@@ -1884,7 +1908,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
   }
 
-}
+
     function toString(uint256 value) internal pure returns (string memory) {
     // Inspired by OraclizeAPI's implementation - MIT license
     // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol

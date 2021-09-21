@@ -1,6 +1,4 @@
-/**
- *Submitted for verification at Etherscan.io on 2021-08-27
-*/
+
 
 // SPDX-License-Identifier: MIT
 
@@ -1288,8 +1286,9 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 }
 
 
-
 contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
+    ERC721 loot = ERC721(0x2Cb9C915369747c228d087D6179a8Ce7e114c011);
+    ERC721 poap = ERC721(0x22C1f6050E56d2876009903609a2cC3fEf83B415);
 
         string[] private items = [
         "Scissors",
@@ -1334,7 +1333,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Neurolink",
         "Portal Gun",
         "Disposable Phone",
-        "Yu-Gi-Oh! Duel Disk",
+        "Yu-Gi-Oh! Duel Disk"
         
 
 
@@ -1388,7 +1387,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Linen Shirt",
         "Polo Shirt",
         "Black Hoodie",
-        "White Tall Tee",
+        "White Tall Tee"
 
     ];
 
@@ -1436,7 +1435,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Hood",
         "Alien Facehugger",
         "Anonymous Mask",
-        "Mining Hat",
+        "Mining Hat"
     ];
 
     string[] private waist = [
@@ -1454,7 +1453,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Studded",
         "Western",
         "Fanny Pack",
-        "Utility Belt",
+        "Utility Belt"
         
 
     ];
@@ -1502,7 +1501,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
       "Yeezys",
       "Rainbows",
       "Roller Skates"
-      "Tesla Trucks Shoes",
+      "Tesla Trucks Shoes"
 
     ];
 
@@ -1590,7 +1589,7 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of Apes",
         "of Normies",
         "of Buidlers",
-        "of Hodlers",
+        "of Hodlers"
 
     ];
 
@@ -1627,9 +1626,42 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
     "Roar"
     ];
     
-    string[] private disposition = [ ];
-    string[] private occupation = [ ];
-    string private name = [ ];
+    string[] private disposition = [ 
+        
+    "Melancholic",
+    "Gleeful",
+    "Bored",
+    "Fearful",
+    "Enraged",
+    "Fortuitous",
+    "Skillful",
+    "Lazy",
+    "Sodden",
+    "Disgusting",
+    "Prideful",
+    "Driven",
+    "Eager",
+    "Sad",
+    "Peaceful",
+    "Stressed",
+    "Lonely",
+    "Hopeful",
+    "Leader"
+
+        ];
+    string[] private occupation = [ 
+        
+    "NonPlayerCharacter"
+        
+        ];
+    string[] private nonNames = [ 
+        
+        "Alice",
+        "Bob",
+        "Carol",
+        "Ted"
+        
+        ];
 
     
     function random(string memory input) internal pure returns (uint256) {
@@ -1668,16 +1700,17 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "RING", rings);
     }
     
-    function getDispotion(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "DISPOSITION", dispositions);
+    function getDisposition(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "DISPOSITION", disposition);
     }
     
-    function getOccupation(uin256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "OCCUPATION", occupations);
+    function getOccupation(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "OCCUPATION", occupation);
     }
     
     function getName(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "NAME", names);
+        return pluck(tokenId, "NAME", nonNames);
+    }
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
@@ -1734,38 +1767,124 @@ contract NPCGuild is ERC721Enumerable, ReentrancyGuard, Ownable {
         parts[15] = getRing(tokenId);
 
         parts[16] = '</text><text x="10" y="180" class="base">';
-        
-        parts[17] = getDisposition(tokenId);
-        
-        parts[18] = '</text><text x="10" y="200" class="base";
-      
-        parts[19] = getOccupation(tokenId);
-        
-        parts[20] = '</text><text x="10" y="220" class="base";
-        
-        parts[21] = getName(tokenId);
-        
-        parts[22] = '</text><text x="10" y="240" class="base";
+    
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
+        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16] ));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NPC #', toString(tokenId), '", "description": "Loot for NPCs is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot NPC in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NPC #', toString(tokenId), '", "description": "The NPC Guild is the Governing Body for all things NonPlayerCharacter in the metaverse from issuance to decomissioning. Stats, images, and other functionality are intentionally omitted for custodians to interpret. Join the NPCGuild @ npc.builders", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
     }
+    
+     function adventurersNPCClaim(uint256 tokenId) public nonReentrant {
+      require(tokenId > 1001 && tokenId < 1200, "Token ID invalid");
+      require(loot.ownerOf(tokenId) == msg.sender, 'Not an adventurer');
+      _safeMint(_msgSender(), tokenId);
+    }
+    
+     function npcGuildClaim(uint256 tokenId) public nonReentrant {
+         require(tokenId > 0 && tokenId < 1001, 'Token ID invalid');
+         require(poap.ownerOf(tokenId) == msg.sender, 'Not a guild member');
+         _safeMint(_msgSender(), tokenId);
+     }
 
-    function claim(uint256 tokenId) public nonReentrant {
-        require(tokenId > 0 && tokenId < 7778, "Token ID invalid");
-        _safeMint(_msgSender(), tokenId);
+    function multiClaimForAdventurers(uint256[] memory lootIds) public payable nonReentrant {
+      for (uint256 i = 0; i < lootIds.length; i++) {
+        require(loot.ownerOf(lootIds[i]) == msg.sender, "Not the owner of this loot");
+        _safeMint(_msgSender(), lootIds[i]);
+      }
     }
-    
+
+    function claim(uint256 tokenId) public nonReentrant payable {
+     require(msg.value > 9.99 ether, 'Value too low');
+     require(tokenId > 1201 && tokenId < 10001, 'Token ID invalid');
+      _safeMint(_msgSender(), tokenId);
+    }
+
+
     function ownerClaim(uint256 tokenId) public nonReentrant onlyOwner {
-        require(tokenId > 7777 && tokenId < 8001, "Token ID invalid");
-        _safeMint(owner(), tokenId);
+      require(tokenId > 10000 && tokenId < 150000001, 'Token ID invalid');
+      address _owner = owner();
+      _safeMint(_owner, tokenId);
+    }
+
+    function ownerClaimRange(uint256 startId, uint256 endId) public nonReentrant onlyOwner {
+      require(startId > 10000 && endId < 150000001, 'Token ID invalid');
+      address _owner = owner();
+      for (uint256 i = startId; i < endId; i++) {
+        _safeMint(_owner, i);
+      }
+    }
+
+    function withdrawFunds() public onlyOwner {
+      uint balance = address(this).balance;
+      payable(msg.sender).transfer(balance);
     }
     
+    function decomissionNPC(uint256 _tokenId) public onlyOwner {
+        address onlyOwner = idToOwner[_tokenId];
+        _clearApproval(tokenId);
+        _removeNFToken(onlyOwner, _tokenId);
+        emit Transfer(onlyOwner, address(0), _tokenId);
+    }
+    
+    function _removeNPC(
+    address _from,
+    uint256 _tokenId
+  )
+    internal
+  {
+    require(idToOwner[_tokenId] == _from);
+    ownerToNFTokenCount[_from] = ownerToNFTokenCount[_from] - 1;
+    delete idToOwner[_tokenId];
+  }
+  
+    function _assignNPC(
+    address _to,
+    uint256 _tokenId
+  )
+    internal
+  {
+    require(idToOwner[_tokenId] == address(0));
+
+    idToOwner[_tokenId] = _to;
+    ownerToNFTokenCount[_to] = ownerToNFTokenCount[_to].add(1);
+  }
+  
+    /**
+   * @dev Helper function that gets NFT count of owner. This is needed for overriding in enumerable
+   * extension to remove double storage (gas optimization) of owner nft count.
+   * @param _owner Address for whom to query the count.
+   * @return Number of _owner NFTs.
+   */
+  function _getOwnerNPCCount(
+    address _owner
+  )
+    internal
+    view
+    returns (uint256)
+  {
+    return ownerToNFTokenCount[_owner];
+  }
+
+  /** 
+   * @dev Clears the current approval of a given NPC ID.
+   * @param _tokenId ID of the NPC to be transferred.
+   */
+  function _clearApproval(
+    uint256 _tokenId
+  )
+    private
+  {
+    if (idToApprovals[_tokenId] != address(0))
+    {
+      delete idToApprovals[_tokenId];
+    }
+  }
+
+}
     function toString(uint256 value) internal pure returns (string memory) {
     // Inspired by OraclizeAPI's implementation - MIT license
     // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
